@@ -20,6 +20,26 @@ namespace CarRace
         Random random = new Random();
         
         bool startbuttun = true;
+        
+        #region createsrandomNumbers
+        public void creatsRandomNumber()
+        {
+            // random number between 2-10 is added to left side of pictureboxes
+            // they move from left to right wiht a random number between 2-10
+            pictureBox1.Left += random.Next(2, 10);
+            pictureBox2.Left += random.Next(2, 10);
+            pictureBox3.Left += random.Next(2, 10);
+        }
+        #endregion
+
+        #region Horses get to first position
+        public void getHorsesFirstPosition()
+        {
+            pictureBox1.Location = new Point(44, 12);
+            pictureBox2.Location = new Point(44, 100);
+            pictureBox3.Location = new Point(44, 200);
+        }
+        #endregion
 
         #region timer
         private void timer1_Tick(object sender, EventArgs e)
@@ -27,13 +47,7 @@ namespace CarRace
             //the finishline is left side position of label4
             int finishline = label4.Left;
 
-            #region random position
-            // random number between 2-10 is added to left side of pictureboxes
-            // they move from left to right wiht a random number between 2-10
-            pictureBox1.Left += random.Next(2, 10);
-            pictureBox2.Left += random.Next(2, 10);
-            pictureBox3.Left += random.Next(2, 10);
-            #endregion
+            creatsRandomNumber();
 
             #region comentary
 
@@ -77,38 +91,20 @@ namespace CarRace
 
         #region start buttun
         private void button1_Click(object sender, EventArgs e)
-        {
-            //we have bool variable. if it is true it starts the race,
-            //if it is false it stops the race
+        {           
             if (startbuttun==true)
-            {
-            //if bool is ture timer starts.
+            {           
                timer1.Enabled = true;
-
-            // Button text turn into "stop race" for next click
                button1.Text = "Stop Race";
-            
-            //bool value should be false in ordert stop fuction works.
                 startbuttun = false;
             }
             else
-            {
-            // if bool value is not ture ( that means it is false)
-            //timer stop working (enabled is false). 
-            
+            {          
                 timer1.Enabled = false;
-
-            //bool value is ture for next start click.
                 startbuttun = true;
-            //button text changes to start race for next click.
                 button1.Text = "Start Race";
-            // label text is empitied for next start
                 label8.Text = "";
-            // we cahanges the pozition of hourses to their inital pisition.
-                pictureBox1.Location = new Point(44,12);
-                pictureBox2.Location = new Point(44,100);
-                pictureBox3.Location = new Point(44,200);
-
+                getHorsesFirstPosition();
             }
         }
         #endregion
